@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head><title>uOttawa Journal Cut Highlighter Options</title></head>
-<body>
+    <head>
+        <title>uOttawa Journal Cut Highlighter Options</title>
 
-Which set of journals should we highlight?
-<select id="journalSet">
- <option value="current">Current</option>
- <option value="original">Original</option>
-</select>
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.6.1/css/tachyons.min.css"/>
+    </head>
+    <body>
+        <label for="journalSet">Which set of journals should we highlight?</label>
+        <select id="journalSet">
+         <option value="current">Current</option>
+         <option value="original">Original</option>
+        </select>
 
-<div id="status"></div>
-<button id="save">Save</button>
+        <div id="status"></div>
+        <button id="save">Save</button>
 
-<script src="options.js"></script>
-</body>
+        <script src="options.js"></script>
+    </body>
 </html>
