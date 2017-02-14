@@ -1,0 +1,43 @@
+{
+  "name": "uOttawa Journal Cut Highlighter",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "UO is cutting over 4000 journals from its collections; this extension highlights them in search results.",
+  "homepage_url": "https://lucascherkewski.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
+    "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
+    "http://uottawa-primo.hosted.exlibrisgroup.com/*",
+    "https://uottawa-primo.hosted.exlibrisgroup.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
+        "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
+        "http://uottawa-primo.hosted.exlibrisgroup.com/*",
+        "https://uottawa-primo.hosted.exlibrisgroup.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
+        "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
+        "http://uottawa-primo.hosted.exlibrisgroup.com/*",
+        "https://uottawa-primo.hosted.exlibrisgroup.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}
