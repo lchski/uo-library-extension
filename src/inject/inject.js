@@ -3,35 +3,44 @@ chrome.extension.sendMessage({}, function(response) {
 		if (document.readyState === "complete") {
 			clearInterval(readyStateCheckInterval);
 
-			if (document.location.hostname.indexOf('exlibrisgroup') !== -1) {
-				ResultHighlighter.init('.EXLResultDetails', '.EXLResult');
-			}
+			chrome.storage.sync.get('journalSet', function(items) {
+				if (document.location.hostname.indexOf('exlibrisgroup') !== -1) {
+					ResultHighlighter.init(items.journalSet, '.EXLResultDetails', '.EXLResult');
+				}
 
-			if (document.location.hostname.indexOf('scholar.google') !== -1) {
-				ResultHighlighter.init('.gs_a', '.gs_r');
-			}
+				if (document.location.hostname.indexOf('scholar.google') !== -1) {
+					ResultHighlighter.init(items.journalSet, '.gs_a', '.gs_r');
+				}
+			});
 		}
 	}, 10);
 });
 
 var ResultHighlighter = {
-	init: function( journalSelector, resultSelector ) {
+	init: function( journalSet, journalSelector, resultSelector ) {
 		var results = document.querySelectorAll(journalSelector);
+		var journals;
+
+		if ( journalSet === 'current' ) {
+			journals = this.currentJournals;
+		} else if ( journalSet === 'original' ) {
+			journals = this.originalJournals;
+		}
 
 		for (i = 0; i < results.length; i++) {
 			var result = results[i];
 
-			if (this.doesStringContainJournal(result.textContent)) {
+			if (this.doesStringContainJournal(result.textContent, journals)) {
 				this.getClosest(result, resultSelector).classList.add('lchski-article--inaccessible');
 			}
 		}
 	},
 
-	doesStringContainJournal: function( stringToCheck ) {
-		var length = this.journals.length;
+	doesStringContainJournal: function( stringToCheck, journals ) {
+		var length = journals.length;
 
 		while (length--) {
-			if (stringToCheck.toLowerCase().indexOf(this.journals[length].toLowerCase()) !== -1) {
+			if (stringToCheck.toLowerCase().indexOf(journals[length].toLowerCase()) !== -1) {
 				return true;
 			}
 		}
@@ -111,7 +120,7 @@ var ResultHighlighter = {
 
 	},
 
-	journals: [
+	originalJournals: [
 	    "a/b: Auto/Biography Studies",
 	    "Accountability in Research",
 	    "Accounting and Business Research",
@@ -5046,5 +5055,197 @@ var ResultHighlighter = {
 	    "Tropical Plant Pathology",
 	    "Uro-News",
 	    "Zentralblatt für Arbeitsmedizin, Arbeitsschutz und Ergonomie"
+	],
+
+	currentJournals: [
+		"Africanus",
+		"Annuaire des subventions au Québec en ligne",
+		"Aspasia",
+		"Association for Canadian Theatre Research - membership",
+		"Bibliography of Asian studies",
+		"Capital Cube",
+		"CEPS : Chinese electronic periodical services",
+		"Challenge",
+		"Discussion paper / Centre for Economic Policy Research",
+		"Emergence",
+		"Encyclopaedia Islamica",
+		"Foundations and Trends in Business and Economics",
+		"Frost & Sullivan",
+		"Gifted and talented international",
+		"Higher education review",
+		"Historia",
+		"Illinois classical studies",
+		"Index of Christian art",
+		"Indiana magazine of history",
+		"Infomart",
+		"International journal of pluralism and economics education",
+		"International journal of work organisation and emotion",
+		"Joint Commission journal on quality and patient safety",
+		"Journal of agriculture, food systems, and community development",
+		"Journal of institutional and theoretical economics : JITE.",
+		"Journal of the Warburg and Courtauld Institutes",
+		"Knowledge organization",
+		"Learning & memory",
+		"Lias",
+		"Library and information science abstracts",
+		"Mergent archives",
+		"Mergent online",
+		"Mirabile : Digital archive for medieval latin culture",
+		"Music cataloging bulletin",
+		"New Testament abstracts",
+		"Newsletter / Association for Canadian Theatre Research = Newsletter / Association pour la recherche théâtrale au Canada",
+		"Old Testament abstracts",
+		"Performing arts database",
+		"Play index",
+		"Privco",
+		"Problems of economic transition",
+		"Quaderni urbinati di cultura classica",
+		"Quill & quire",
+		"Readers' guide retrospective",
+		"Review of economics.",
+		"Revue d'etudes comparatives Est-Ouest",
+		"Revue d'histoire de l'Église de France",
+		"Routledge encyclopedia of philosophy",
+		"Security journal",
+		"Slavic review",
+		"Sociologia internationalis",
+		"SPEC kit / Systems and Procedures Exchange Center",
+		"St. Antony's International Review",
+		"Teatro español del siglo de oro",
+		"The Charleston advisor : critical reviews of web products for information professionals",
+		"The Current digest of the Chinese press",
+		"The Huntington Library quarterly",
+		"The Huntington Library quarterly.",
+		"The Journal of African American history.",
+		"The Journal of social, political and economic studies",
+		"The music index online",
+		"The William and Mary quarterly",
+		"TLS historical archive",
+		"Tricycle : the Buddhist review",
+		"Turkish review.",
+		"Vanderbilt television news archive",
+		"Women's studies international",
+		"Music industry data",
+		"Indstat 2",
+		"Indstat 4",
+		"RIPM online archive of music periodicals",
+		"Retrospective index to music periodicals",
+		"ACI symposium publications",
+		"ACSESS digital library",
+		"American water works association membership",
+		"Applied physics express",
+		"Aquatic living resources",
+		"Aquatic sciences and fisheries abstracts",
+		"ASM International materials collection",
+		"Biological sciences",
+		"Cinefex",
+		"Control and intelligent systems",
+		"DIPPR 801",
+		"Earth",
+		"Environmental science and pollution management",
+		"ESAIM. Control, optimisation and calculus of variations",
+		"Fundamental and applied limnology",
+		"Hydrology Research",
+		"Inland waters",
+		"International journal of computers & applications",
+		"International journal of high performance computing and networking",
+		"International journal of microwave and optical technology",
+		"International journal of power & energy systems",
+		"International journal of sensor networks",
+		"International journal of software engineering and knowledge engineering.",
+		"International journal of structural stability and dynamics",
+		"Japanese journal of applied physics",
+		"Journal of aircraft",
+		"Journal of guidance, control, and dynamics",
+		"Journal of industrial and management optimization",
+		"Journal of mechanics of materials and structures",
+		"Journal of operator theory",
+		"Journal of propulsion and power",
+		"Journal of spacecraft and rockets",
+		"Journal of the International Association for Shell and Spatial Structures",
+		"Journal of thermophysics and heat transfer",
+		"Journal of topology",
+		"Knovel Ebook Subject Collections",
+		"Mathematical research letters",
+		"Mathematics of computation",
+		"Mechanics & industry",
+		"Moscow mathematical journal",
+		"Networks and heterogeneous media",
+		"Parallel processing letters",
+		"Publications of the Research Institute for Mathematical Sciences",
+		"Quantum topology",
+		"Quarterly of applied mathematics",
+		"Stratigraphy",
+		"Structural engineer",
+		"The Biological bulletin",
+		"The Michigan mathematical journal",
+		"Theory of probability and mathematical statistics",
+		"Transactions of the Moscow Mathematical Society",
+		"Waterlines",
+		"Zeitschrift für Naturforschung. B, A journal of chemical sciences",
+		"Arbitration international",
+		"Canadian environmental law guide",
+		"Canadian estate planning guide",
+		"Canadian real estate income tax guide",
+		"Collection fiscale du Québec. Provincial",
+		"Comparative legal history",
+		"Directors' liability in Canada",
+		"Droit municipal : principes généraux et contentieux",
+		"Droit social",
+		"Employment law : solutions for the Canadian workplace",
+		"Global-Regulation",
+		"Internet Guide for the Legal Researcher Newsletter",
+		"Journal on the use of force and international law",
+		"Latin lawyer",
+		"Legal scholarship network",
+		"L'environnement au Québec",
+		"LexisNexis TotalPatent",
+		"National reporter system (Maritime Law Book)",
+		"Oxford competition law",
+		"Peking University law journal",
+		"Restorative justice",
+		"Royal Gazette. Nova Scotia. Part I",
+		"Spinelli's law librarian's reference shelf",
+		"The Europa world of learning [electronic resource] : the international guide to the academic world",
+		"Transnational legal theory",
+		"World journal of VAT/GST law",
+		"Clinical key",
+		"Current protocols essential laboratory techniques",
+		"Current protocols in microbiology",
+		"Current protocols in pharmacology",
+		"Current protocols in protein science",
+		"Current protocols in toxicology",
+		"Endocrine reviews",
+		"EuroIntervention",
+		"International Tinnitus Journal",
+		"Journal of leukocyte biology : official publication of the Reticuloendothelial Society.",
+		"Journal of medical microbiology",
+		"Lexicomp Online",
+		"Microbiology",
+		"Nursing history review.",
+		"R2 Digital Library",
+		"Taber's cyclopedic medical dictionary",
+		"The Journal of clinical endocrinology and metabolism",
+		"McGraw-Hill Education Electronic Teachers' Guides",
+		"TumbleBookCloud",
+		"Adforum",
+		"America in the 20th century",
+		"Creative Cloud for teams (complete plan)",
+		"LyndaKiosk (NOT Lynda.com)",
+		"AACR2",
+		"Access Science",
+		"Annual Reviews Economics Collection",
+		"Anthropology Plus",
+		"GeoScienceWorld",
+		"Human development",
+		"ICE Current Engineering Journals Collection",
+		"Informit databases",
+		"Journal of curatorial studies",
+		"Medical Library Association - membership",
+		"RefWorks",
+		"Relais Express",
+		"Repère",
+		"Social work abstracts plus",
+		"Web carrière"
 	]
 };

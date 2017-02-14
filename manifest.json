@@ -4,6 +4,7 @@
   "manifest_version": 2,
   "description": "UO is cutting over 4000 journals from its collections; this extension highlights them in search results.",
   "homepage_url": "https://lucascherkewski.com",
+  "options_page": "src/options/options.html",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -11,6 +12,7 @@
   },
   "default_locale": "en",
   "permissions": [
+    "storage",
     "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
     "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
     "http://uottawa-primo.hosted.exlibrisgroup.com/*",
