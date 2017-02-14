@@ -1,16 +1,16 @@
 // Saves options to chrome.storage
 function save_options() {
-  var journalSet = document.getElementById('journalSet').value;
+  var optionsForm = document.getElementById('options');
 
   chrome.storage.sync.set({
-    journalSet: journalSet
+    journalSet: optionsForm.elements['journalSet'].value
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';
     setTimeout(function() {
       status.textContent = '';
-    }, 750);
+  }, 750);
   });
 }
 
@@ -21,7 +21,9 @@ function restore_options() {
   chrome.storage.sync.get({
     journalSet: 'current'
   }, function(items) {
-    document.getElementById('journalSet').value = items.journalSet;
+      var optionsForm = document.getElementById('options');
+
+      optionsForm['journalSet'].value = items.journalSet;
   });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
