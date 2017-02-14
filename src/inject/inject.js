@@ -25,7 +25,7 @@ var ResultHighlighter = {
 		var length = this.journals.length;
 
 		while (length--) {
-			if (stringToCheck.indexOf(this.journals[length]) !== -1) {
+			if (stringToCheck.toLowerCase().indexOf(this.journals[length].toLowerCase()) !== -1) {
 				return true;
 			}
 		}
