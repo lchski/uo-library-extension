@@ -1,22 +1,28 @@
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === "complete") {
-		clearInterval(readyStateCheckInterval);
+		if (document.readyState === "complete") {
+			clearInterval(readyStateCheckInterval);
 
-		ResultHighlighter.init();
-	}
+			if (document.location.hostname.indexOf('exlibrisgroup') !== -1) {
+				ResultHighlighter.init('.EXLResultDetails', '.EXLResult');
+			}
+
+			if (document.location.hostname.indexOf('scholar.google') !== -1) {
+				ResultHighlighter.init('.gs_a', '.gs_r');
+			}
+		}
 	}, 10);
 });
 
 var ResultHighlighter = {
-	init: function() {
-		var results = document.querySelectorAll('.EXLResultDetails');
+	init: function( journalSelector, resultSelector ) {
+		var results = document.querySelectorAll(journalSelector);
 
 		for (i = 0; i < results.length; i++) {
 			var result = results[i];
 
 			if (this.doesStringContainJournal(result.textContent)) {
-				this.getClosest(result, '.EXLResult').classList.add('lchski-article--inaccessible');
+				this.getClosest(result, resultSelector).classList.add('lchski-article--inaccessible');
 			}
 		}
 	},

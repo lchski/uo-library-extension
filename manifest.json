@@ -14,7 +14,9 @@
     "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
     "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
     "http://uottawa-primo.hosted.exlibrisgroup.com/*",
-    "https://uottawa-primo.hosted.exlibrisgroup.com/*"
+    "https://uottawa-primo.hosted.exlibrisgroup.com/*",
+    "http://scholar.google.ca/*",
+    "https://scholar.google.ca/*"
   ],
   "content_scripts": [
     {
@@ -22,7 +24,9 @@
         "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
         "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
         "http://uottawa-primo.hosted.exlibrisgroup.com/*",
-        "https://uottawa-primo.hosted.exlibrisgroup.com/*"
+        "https://uottawa-primo.hosted.exlibrisgroup.com/*",
+        "http://scholar.google.ca/*",
+        "https://scholar.google.ca/*"
       ],
       "css": [
         "src/inject/inject.css"
@@ -33,7 +37,9 @@
         "http://primo-standard-lb.hosted.exlibrisgroup.com/*",
         "https://primo-standard-lb.hosted.exlibrisgroup.com/*",
         "http://uottawa-primo.hosted.exlibrisgroup.com/*",
-        "https://uottawa-primo.hosted.exlibrisgroup.com/*"
+        "https://uottawa-primo.hosted.exlibrisgroup.com/*",
+        "http://scholar.google.ca/*",
+        "https://scholar.google.ca/*"
       ],
       "js": [
         "src/inject/inject.js"
