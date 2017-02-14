@@ -5,12 +5,15 @@
 
         <link rel="stylesheet" href="https://unpkg.com/tachyons@4.6.1/css/tachyons.min.css"/>
     </head>
-    <body>
-        <label for="journalSet">Which set of journals should we highlight?</label>
-        <select id="journalSet">
-         <option value="current">Current</option>
-         <option value="original">Original</option>
-        </select>
+    <body class="pa4">
+        <fieldset>
+            <legend>Which set of journals should we highlight?</legend>
+
+            <label for="journalSetCurrent">Current</label>
+            <input type="radio" name="journalSet" id="journalSetCurrent" value="current">
+            <label for="journalSetOriginal">Original</label>
+            <input type="radio" name="journalSet" id="journalSetOriginal" value="original">
+        </fieldset>
 
         <div id="status"></div>
         <button id="save">Save</button>
